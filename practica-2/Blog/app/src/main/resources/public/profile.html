@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="./css/profile.css">
+  <link rel="stylesheet" href="./css/menu.css">
+</head>
+<body>
+    <header>
+        <nav class="navegator">
+            <ul class="ul-navegator">
+                <li class="li-navegator" ><a href="/">Home</a></li>
+                <li class="li-navegator"><a href="/profile.html">Perfil</a></li>
+                <li class="li-navegator"><a href="/newArticle.html">Nuevo articulo</a></li>
+                <li class="li-navegator"><a href="/misArticulos.html" >Mis articulos</a></li> <!-- style="text-decoration: none;" -->
+                <li class="li-navegator" id="admin-users"><a href="/adminUser.html">Administrar usuarios</a></li>
+                <li class="li-navegator" id="login"><a>Cerrar sesion</a></li>
+            </ul>
+        </nav>
+
+    </header>
+  <div class="profile-header">
+    <div class="profile-image"></div>
+    <div class="profile-info">
+      <h2 class="profile-username" id="username">username - </h2>
+      <h3 class="profile-name" id="profile-name">Nombre del Usuario</h3>
+    </div>
+  </div>
+  
+  <div id="articles-container" class="article-section">
+    <article class="article">
+      <h3 class="article-title">Título del Artículo 1</h3>
+      <div class="tagsArticle">
+        <p class="tagArticle">#etiqueta</p>
+        <p class="tagArticle">#etiqueta</p>
+        <p class="tagArticle">#etiqueta</p>
+      </div>
+      <p class="article-content">Contenido del Artículo 1</p>
+    </article>
+    <article class="article">
+      <h3 class="article-title">Título del Artículo 1</h3>
+      <div class="tagsArticle">
+        <p class="tagArticle">#etiqueta</p>
+        <p class="tagArticle">#etiqueta</p>
+        <p class="tagArticle">#etiqueta</p>
+      </div>
+      <p class="article-content">Contenido del Artículo 1</p>
+    </article>   <!-- Agrega más artículos aquí -->
+  </div>
+  <script type="module" src="./js/profile.js"></script>
+</body>
+</html>
