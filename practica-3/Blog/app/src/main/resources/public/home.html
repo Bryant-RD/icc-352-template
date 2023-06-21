@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navegator">
+            <ul class="ul-navegator">
+                <li class="li-navegator" ><a href="/">Home</a></li>
+                <li class="li-navegator"><a href="/profile.html">Perfil</a></li>
+                <li class="li-navegator"><a href="/newArticle.html">Nuevo articulo</a></li>
+                <li class="li-navegator"><a href="/misArticulos.html" >Mis articulos</a></li> <!-- style="text-decoration: none;" -->
+                <li class="li-navegator" id="admin-users"><a href="/adminUser.html">Administrar usuarios</a></li>
+                <li class="li-navegator" id="login"><a>Cerrar sesion</a></li>
+            </ul>
+        </nav>
+        <div>
+            <p>Carrousel here</p>
+        </div>
+    </header>
+    <section class="section-article">
+        <h2 class="title-section">Articulos recientes</h2>
+         <div id="article-container">
+
+        </div>
+        <div class="paginationContainer" >
+            <p class="flecha"> < </p>
+            <div id="pagination"></div>
+            <p class="flecha"> > </p>
+        </div>
+    </section>
+    <section class="more-articles">
+        <aside class="container-views">
+            <h2 class="title-section">Más vistos</h2>
+            <div class="list-views">
+                <article class="article">
+                    <h3 class="title-article">titulo articulo - <span>2016</span></h3>
+                    <p class="text-article">texto de articulo</p>
+                    <p class="autor-article" >Autor del articulo</p>
+                </article>
+            </div>
+        </aside>
+        <aside class="container-comments">
+            <h2 class="title-section">Más comentados</h2>
+            <div class="list-comments">
+                <article class="article">
+                    <h3 class="title-article">titulo articulo - <span>2016</span></h3>
+                    <p class="text-article">texto de articulo</p>
+                    <p class="autor-article" >Autor del articulo</p>
+                </article>
+            </div>
+        </aside>
+        <aside class="container-tags">
+            <h2 class="title-section">Etiquetas</h2>
+            <div class="list-tags">
+                <p class="tag">Etiqueta</p>
+            </div>
+        </aside>
+    </section>
+    <footer>
+    </footer>
+
+    <script type="module" src="./js/index.js"></script>
+</body>
+</html>

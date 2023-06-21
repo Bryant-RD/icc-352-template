@@ -1,25 +1,15 @@
-import { getUserActive, getUserById } from "./api/user.controller.js"
+import { getUserActive } from "./api/user.controller.js"
 
 
 const username = document.getElementById("username");
 const profileName = document.getElementById("profile-name");
 const articlesContainer = document.getElementById("articles-container");
 
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+const user = await getUserActive();
+console.log(user);
 
-
-if(id == null) {
-  const user = await getUserActive();
-  console.log(user);
-
-  username.innerText = `${user.username} - ${user.administrator ? "Administrador" : "autor"}`
-  profileName.innerText = user.nombre;
-} else {
-  const user = await getUserById(id)
-  username.innerText = `${user.username} - ${user.administrator ? "Administrador" : "autor"}`
-  profileName.innerText = user.nombre;
-}
+username.innerText = `${user.username} - ${user.administrator ? "Administrador" : "autor"}`
+profileName.innerText = user.nombre;
 
 
 const printArticlesUser = async () => {

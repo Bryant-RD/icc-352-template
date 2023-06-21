@@ -65,15 +65,20 @@ public class ArticleController {
         Gson gson = new Gson();
         Article newArticle = gson.fromJson(context.body(), Article.class);
 
-        Article oldArticle = DB.initDB().getJustArticleByid(newArticle.getId());
-        ArrayList<Tag> filtredTags = DB.initDB().removeDuplicateTags(oldArticle.getEtiquetas(), newArticle.getEtiquetas());
+        DB.initDB().updArticle(newArticle);
 
-
-        oldArticle.setTitulo(newArticle.getTitulo());
-        oldArticle.setCuerpo(newArticle.getCuerpo());
-        oldArticle.setEtiquetas(filtredTags);
+        Message msg = new Message("Success", "Articulo modificado correctamente");
         
+        gson.toJson(msg);
 
+
+    }
+
+    public static void deleteArticle(Context context) {
+        Gson gson = new Gson();
+        Article article = gson.fromJson(context.body(), Article.class);
+
+        DB.initDB().delteArticle(article);
     }
     
     

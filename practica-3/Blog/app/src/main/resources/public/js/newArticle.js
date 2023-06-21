@@ -59,7 +59,8 @@ addTagButton.addEventListener("click", () => {
     if (inputTag.value != "") {
         tags.push({
             id: Date.now(),
-            etiqueta: inputTag.value
+            etiqueta: inputTag.value,
+            articulo: 0
         })
         
         const tag = document.createElement("p");
@@ -75,34 +76,43 @@ addTagButton.addEventListener("click", () => {
 })
 
 button.addEventListener("click", async () => {
-    
-    const user = await getUserActive();    
-    let obj
+    const user = await getUserActive();
+    let obj;
     let actionArticle;
 
     if (id != null) {
-
         obj = {
             id: articleEditing.id,
             titulo: titleArticle.value,
             cuerpo: bodyArticle.value,
             autor: user,
             fecha: articleEditing.fecha,
-            etiquetas: tags
-        }
+            etiquetas: tags.map(tag => ({
+                id: tag.id,
+                etiqueta: tag.etiqueta,
+                articulo: articleEditing.id
+            }))
+        };
 
         actionArticle = await updateArticleById(id, obj);
-    }else {
+    } else {
+        const newArticleId = Date.now();
         obj = {
-            id: Date.now(),
+            id: newArticleId,
             titulo: titleArticle.value,
             cuerpo: bodyArticle.value,
             autor: user,
-            fecha: Date.UTC(),
-            etiquetas: tags
-        }
-       actionArticle = await createArticle(obj)
+            fecha: new Date(),
+            etiquetas: tags.map(tag => ({
+                id: tag.id,
+                etiqueta: tag.etiqueta,
+                articulo: null
+            }))
+        };
+
+        actionArticle = await createArticle(obj);
     }
+
     console.log(actionArticle);
 
     titleArticle.value = "";
@@ -112,8 +122,8 @@ button.addEventListener("click", async () => {
     while (containerTagList.firstChild) {
         containerTagList.firstChild.remove();
     }
+});
 
-})
 
 
 

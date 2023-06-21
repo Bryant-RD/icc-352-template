@@ -7,13 +7,6 @@ body {
 }
   
 
-.etiqueta {
-  background-color: #00589b;
-  color: white;
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-}
-
   .section-article {
     width: 80%;
     margin: auto;
@@ -146,4 +139,36 @@ body {
   .tag:hover {
     transform: translateY(-5px);
     font-size: 1.05rem;
+  }
+
+  .paginationContainer {
+    display: flex;
+    width: 30%; 
+    margin: auto;
+    justify-content: space-around;
+  }
+
+  #pagination {
+    display: flex;
+    text-align: center;
+
+    
+  }
+
+  .flecha {
+    font-weight: bold;
+    padding: 0.3rem 0.5rem;
+    background-color: #00589b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+  }
+
+  .itemPag {
+    cursor: pointer;
+    border:solid 1px #00589b;
+    padding: 0.3rem 0.5rem;
+    margin: auto 2px;
+    border-radius: 5px;
   }

@@ -9,65 +9,6 @@ export const getUsers = async () => {
     }
 }
 
-export const getUserById = async (id) => {
-  try {
-    const response = await fetch(`/user/${id}`)
-    const data = await response.json();
-    return data
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export const createUser = async (user) => {
-
-  try {
-      const response = await fetch(`/create-user`, {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-              'Content-type': 'application/json'
-          }
-      });
-
-      if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          return data;
-        } else {
-          throw new Error('Error en la solicitud');
-        }
-
-      
-  } catch (error) {
-      console.log(error);
-  }
-}
-
-export const updateUserById = async (id, obj) => {
-  try {
-    const response = await fetch(`/update-user/${id}`, {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    });
-
-    if (response.ok) {
-        alert("Articulo editado correctamente.");
-    } else {
-        console.log("HTTP request unsuccessful");
-    }
-
-    const data = await response.json();
-    return data
-} catch (error) {
-    console.log(error);
-}
-}
-
 const fetchProfileData = async () => {
     try {
       const response = await fetch('/profile');

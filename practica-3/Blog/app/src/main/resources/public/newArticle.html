@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Artículo</title>
+    <link rel="stylesheet" href="./css/newArticle.css">
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navegator">
+          <ul class="ul-navegator">
+            <li class="li-navegator" ><a href="/">Home</a></li>
+            <li class="li-navegator"><a href="/profile.html">Perfil</a></li>
+            <li class="li-navegator"><a href="/newArticle.html">Nuevo articulo</a></li>
+            <li class="li-navegator"><a href="/misArticulos.html" >Mis articulos</a></li> <!-- style="text-decoration: none;" -->
+            <li class="li-navegator" id="admin-users"><a href="/adminUser.html">Administrar usuarios</a></li>
+            <li class="li-navegator" id="login"><a href="">Cerrar sesion</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+        <h1 id="title-article">Registrar Artículo</h1>
+        <form id="articleForm">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Contenido:</label>
+                <textarea id="content" name="content" rows="10" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tags">Etiquetas:</label>
+                <div class="addTagForm">
+                    <input type="text" id="tags" name="tags">
+                    <p id="addTagButton" class="addTagButton">Agregar etiqueta</p>
+                </div>
+                <div id="tagList" class="tagList">
+                    <p class="tag">#tag</p>
+                </div>
+            </div>
+            <p id="newArticleButton">Registrar</p>
+        </form>
+    </div>
+
+    <script type="module" src="./js/newArticle.js"></script>
+</body>
+
+</html>

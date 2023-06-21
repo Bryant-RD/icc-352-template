@@ -3,11 +3,15 @@ package blog.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 
 import blog.DB.DB;
+import blog.encapsulaciones.Article;
 import blog.encapsulaciones.Message;
+import blog.encapsulaciones.Tag;
 import blog.encapsulaciones.User;
 import io.javalin.http.Context;
 
@@ -60,26 +64,25 @@ public class UserController {
     
     public static void createUser(Context context) {
 
-        String username = context.formParam("username");
-        String name = context.formParam("name");
-        String password = context.formParam("password");
+        Gson gson = new Gson();
+        UUID uuid = UUID.randomUUID();
+        String id = uuid.toString();
 
-        String id = "1";
-
-        User newUser = new User(id, username, name, password, false, true);
+        User newUser = gson.fromJson(context.body(), User.class);
+        newUser.setUserId(id);
         
         if (DB.initDB().createUser(newUser) != null) {
-            Gson gson = new Gson();
+
             String json = gson.toJson(newUser);
 
-            System.out.println("registrado");
+            System.out.println(json);
 
             context.contentType("application/json").result(json);
-            context.redirect("/homeLogOut.html");
+            context.sessionAttribute("userId", newUser.getUserId()); // Establecer un atributo de sesión
+            
 
         } else {
             Message msg = new Message("Error", "Error al regitrar usuario");
-            Gson gson = new Gson();
             String json = gson.toJson(msg);
 
             context.contentType("application/json").result(json);
@@ -88,13 +91,29 @@ public class UserController {
     }
     
     public static void updateUser(Context context) {
-        // Lógica para actualizar un usuario
-        // ...
+
+        Gson gson = new Gson();
+        User newUser = gson.fromJson(context.body(), User.class);
+
+       DB.initDB().updateUser(newUser);
+
+        Message msg = new Message("SUCCESS", "Usuario modificado correctamente");
+        String json = gson.toJson(msg);
+
+        context.contentType("application/json").result(json);
+
     }
     
     public static void deleteUser(Context context) {
-        // Lógica para eliminar un usuario
-        // ...
+         Gson gson = new Gson();
+        User user = gson.fromJson(context.body(), User.class);
+
+       DB.initDB().delteUser(user);
+
+        Message msg = new Message("SUCCESS", "Usuario eliminado correctamente");
+        String json = gson.toJson(msg);
+
+        context.contentType("application/json").result(json);
     }
 
 }

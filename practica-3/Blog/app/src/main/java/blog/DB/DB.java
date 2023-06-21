@@ -21,37 +21,12 @@ public class DB {
 	static Long countArticles = 0L;
 
 
-	User user1 = new User("1","user1", "Usuario 1", "pass1", true, true);
-	User user2 = new User("2" ,"user2", "Usuario 2", "pass2", false, false);
-	User user3 = new User("3" ,"user3", "Usuario 3", "pass3", true, false);
-	User user4 = new User("4" ,"user4", "Usuario 4", "pass4", false, true);
-	User user5 = new User("5" ,"user5", "Usuario 5", "pass5", true, true);
-
 	ArrayList<Tag> auxtags = new ArrayList<Tag>();
 
-	Article article1 = new Article(1L, "Titulo del articulo 1", "Cuerpo del articulo 1", user1, new Date(), auxtags);
-	Article article2 = new Article(2L, "Titulo del articulo 2", "Cuerpo del articulo 2", user2, new Date(), auxtags);
-	Article article3 = new Article(3L, "Titulo del articulo 3", "Cuerpo del articulo 3", user3, new Date(), auxtags);
-	Article article4 = new Article(4L, "Titulo del articulo 4", "Cuerpo del articulo 4", user4, new Date(), auxtags);
-	Article article5 = new Article(5L, "Titulo del articulo 5", "Cuerpo del articulo 5", user5, new Date(), auxtags);
 
     public DB() {
         users = new ArrayList<User>();
         articles = new ArrayList<Article>();
-
-
-
-		users.add(user1);
-		users.add(user2);
-		users.add(user3);
-		users.add(user4);
-		users.add(user5);
-
-		articles.add(article1);
-		articles.add(article2);
-		articles.add(article3);
-		articles.add(article4);
-		articles.add(article5);
 
 
     }
@@ -154,44 +129,6 @@ public class DB {
 	}
 
 
-	public User updateUser(User newUser) {
-
-		User oldUser = getUserById(newUser.getUserId());
-
-        oldUser.setNombre(newUser.getNombre());
-        oldUser.setUsername(newUser.getUsername());
-        oldUser.setPassword(newUser.getPassword());
-        oldUser.setAdministrator(newUser.isAdministrator());
-        oldUser.setAutor(newUser.isAutor());
-
-
-		return oldUser;
-	}
-
-	public Article updArticle (Article newArticle) {
-
-		Article oldArticle = getJustArticleByid(newArticle.getId());
-        ArrayList<Tag> filtredTags = removeDuplicateTags(oldArticle.getEtiquetas(), newArticle.getEtiquetas());
-
-
-        oldArticle.setTitulo(newArticle.getTitulo());
-        oldArticle.setCuerpo(newArticle.getCuerpo());
-        oldArticle.setEtiquetas(filtredTags);
-
-
-		return oldArticle;
-	}
-
-	
-
-	public void delteArticle(Article article) {
-		
-		articles.remove(article);
-	}
-
-	public void delteUser (User user) {
-		users.remove(user);
-	}
 
 
 

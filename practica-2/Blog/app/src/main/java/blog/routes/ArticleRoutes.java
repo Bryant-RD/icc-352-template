@@ -9,7 +9,7 @@ public class ArticleRoutes {
         app.get("/article/{id}", ArticleController::getArticleById);
         app.post("/create-article", ArticleController::createArticle);
         app.put("/update-article/{id}", ArticleController::updateArticle);
-        // app.delete("/delete-article/:id", ArticleController::deleteArticulo);
+        app.delete("/delete-article/{id}", ArticleController::deleteArticle);
         app.get("/user-articles/{userId}", ArticleController::getAutorArticles);
     }
 }

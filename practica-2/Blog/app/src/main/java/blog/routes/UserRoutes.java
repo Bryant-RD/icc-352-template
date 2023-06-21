@@ -10,7 +10,7 @@ public class UserRoutes {
         app.post("/login", UserController::loginUser);
         app.get("/logout", UserController::logOutUser);
         app.post("/create-user", UserController::createUser);
-        // app.put("/update-user/:id", UserController::updateUser);
-        // app.delete("/delete-user/:id", UserController::deleteUser);
+        app.put("/update-user/{id}", UserController::updateUser);
+        app.delete("/delete-user/{id}", UserController::deleteUser);
     }
 }
