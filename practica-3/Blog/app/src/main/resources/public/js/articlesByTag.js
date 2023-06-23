@@ -1,5 +1,13 @@
-import { getArticles, getAllTags } from "./api/article.controller.js";
-import { LogOut, getUsers } from "./api/user.controller.js";
+const titulo = document.getElementById("title-section")
+
+const urlParams = new URLSearchParams(window.location.search);
+const tag = urlParams.get('tag');
+
+titulo.innerText = `Articulos con ${tag}`
+
+
+import { getAllTags, getArticlesByTag } from "./api/article.controller.js";
+import { LogOut } from "./api/user.controller.js";
 
 
 const pagination = document.getElementById("pagination");
@@ -22,7 +30,7 @@ for (let i = 1; i < 10; i++) {
 
         e.target.classList.add("active");
 
-         printAllArticles(parseInt(page))
+         printTagArticles(parseInt(page))
     })
 }
 
@@ -32,7 +40,7 @@ const printAllTags = async () => {
         
         tags.forEach(item => {
             const tag = document.createElement("p");
-            tag.className = "tag" //<p class="tag">Etiqueta</p>
+            tag.className = "tag"
             tag.innerText = item;
 
             listTags.appendChild(tag);
@@ -49,7 +57,7 @@ const printAllTags = async () => {
 
 printAllTags();
 
-const printAllArticles = async (page) => {
+const printTagArticles = async () => {
     const container = document.getElementById("article-container");
 
     try {
@@ -58,7 +66,9 @@ const printAllArticles = async (page) => {
             container.firstChild.remove();
         }
 
-        const articles = await getArticles(page);
+        const articles = await getArticlesByTag(tag);
+
+        console.log(articles);
         articles.forEach(item => {
             let descripcion = item.article.cuerpo.length > 70 ? item.article.cuerpo.substring(0, 69) : item.article.cuerpo;
             
@@ -88,7 +98,7 @@ const printAllArticles = async (page) => {
 };
 
 
-printAllArticles(1);
+printTagArticles();
 
 
 const Login = document.getElementById("login");
@@ -99,8 +109,6 @@ const goToLogin = (e) => {
     } else {
         window.location.href = "/login.html"
     }
-
-    // ;
 }
 
 Login.addEventListener("click", goToLogin);

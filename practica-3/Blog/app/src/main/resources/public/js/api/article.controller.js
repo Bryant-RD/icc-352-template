@@ -12,6 +12,16 @@ export const getArticles = async (page) => {
     }
 }
 
+export const getAllTags = async () => {
+    try {
+        const response = await fetch("/tags");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getArticlebyId = async ( id ) => {
     try {
         const response = await fetch(`/article/${id}`);
@@ -20,6 +30,40 @@ export const getArticlebyId = async ( id ) => {
     } catch (e) {
         console.log(e)
         return null;
+    }
+}
+
+export const getArticlesByTag = async (tag) => {
+    try {
+        const response = await fetch(`/tag/articles/${tag}`);
+        const data = await response.json();
+        return data;
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const sendComment = async (comentario) => {
+    try {
+        const response = await fetch(`/create-comment`, {
+            method: "POST",
+            body: JSON.stringify(comentario),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+          } else {
+            throw new Error('Error en la solicitud');
+          }
+
+        
+    } catch (error) {
+        console.log(error);
     }
 }
 

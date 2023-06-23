@@ -1,6 +1,7 @@
 package blog.encapsulaciones;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -11,6 +12,7 @@ public class Tag {
     private String etiqueta;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Article articulo;
 
     public Tag () {

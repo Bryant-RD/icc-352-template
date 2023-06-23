@@ -132,10 +132,10 @@ public class DB {
 
 
 
-	public ArrayList<Tag> removeDuplicateTags(List<Tag> vieja, List<Tag> neuva) {
+	public ArrayList<Tag> removeDuplicateTags(List<Tag> vieja, List<Tag> nueva) {
         ArrayList<Tag> result = new ArrayList<>(vieja);
 
-        for (Tag tag : neuva) {
+        for (Tag tag : nueva) {
             boolean isDuplicate = false;
             for (Tag existingTag : vieja) {
                 if (tag.getEtiqueta().equals(existingTag.getEtiqueta())) {

@@ -1,6 +1,7 @@
 package blog.encapsulaciones;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Comment {
@@ -14,7 +15,8 @@ public class Comment {
     private User autor;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    private Article articulo;
+    @JsonIgnore
+    private  Article articulo;
 
     public Comment () {
     

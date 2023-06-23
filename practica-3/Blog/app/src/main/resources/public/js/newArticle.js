@@ -11,6 +11,7 @@ const titleArticle = document.getElementById("title");
 const bodyArticle = document.getElementById("content");
 const title = document.getElementById("title-article");
 
+
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 let articleEditing;
@@ -51,6 +52,7 @@ if (id != null) {
 
 
 }
+
 
 
 

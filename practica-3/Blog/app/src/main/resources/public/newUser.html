@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="container">
-        <form class="login-form" action="/create-user" method="post">
-            <h2>Iniciar Sesión</h2>
+        <form class="login-form" enctype="multipart/form-data">
+            <h2 id="titulo">Iniciar Sesión</h2>
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required>
             <label for="name">Nombre</label>
@@ -19,8 +19,11 @@
             <input type="password" id="password" name="password" required>
             <label for="password">Confirmar contraseña:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
-            <button type="submit">Registrar</button>
+            <input type="file" id="foto" name="foto"/>
+            <button id="registrar">Registrar</button>
         </form>
     </div>
+
+    <script src="./js/newUser.js" type="module"></script>
 </body>
 </html>

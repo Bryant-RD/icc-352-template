@@ -1,7 +1,7 @@
 package blog.encapsulaciones;
 
 import jakarta.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import java.io.Serializable;
@@ -26,6 +26,7 @@ public class Article {
     @Column
     private Date fecha;
     @OneToMany(mappedBy = "articulo")
+    @JsonIgnore
     private List<Comment> comentarios;
     @OneToMany(mappedBy = "articulo")
     private List<Tag> etiquetas;

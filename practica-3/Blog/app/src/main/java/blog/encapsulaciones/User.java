@@ -18,6 +18,10 @@ public class User {
   
     private String rol;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Foto foto;
+
     public User() {
 
     }
@@ -68,6 +72,14 @@ public class User {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
 }

@@ -27,6 +27,18 @@ body {
 
   }
 
+  .active {
+    color: white;
+    font-weight: bold;
+    background-color:#00589b;
+
+    cursor: pointer;
+    border:solid 1px #00589b;
+    padding: 0.3rem 0.5rem;
+    margin: auto 2px;
+    border-radius: 5px;
+  }
+
   .article {
     background-color: #e9eef8;
     padding: 20px;

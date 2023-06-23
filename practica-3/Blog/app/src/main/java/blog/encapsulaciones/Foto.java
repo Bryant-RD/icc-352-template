@@ -1,10 +1,11 @@
 package blog.encapsulaciones;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
-public class Foto {
+public class Foto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,6 +13,7 @@ public class Foto {
     private String mimeType;
     @Lob
     private String fotoBase64;
+
 
     public Foto() {
     }

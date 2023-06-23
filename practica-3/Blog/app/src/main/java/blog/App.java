@@ -4,6 +4,8 @@
 package blog;
 import blog.encapsulaciones.Message;
 import blog.routes.ArticleRoutes;
+import blog.routes.CommentRoutes;
+import blog.routes.TagRoutes;
 import blog.routes.UserRoutes;
 import io.javalin.Javalin;
 
@@ -99,6 +101,8 @@ public class App {
         app.routes(() -> {
             UserRoutes.configure(app);
             ArticleRoutes.configure(app);
+            TagRoutes.configure(app);
+            CommentRoutes.configure(app);
 
             app.get("/", ctx -> {
                 ctx.redirect("/home.html");

@@ -9,7 +9,7 @@ public class ArticleRoutes {
         ArticleController articleController = new ArticleController();
         app.get("/articles/page/{page}", ctx -> {
             int pageNumber = Integer.parseInt(ctx.pathParam("page"));
-            System.out.println(pageNumber);
+        
             // Llama al método getAllArticles() pasando el objeto Context, el número de página y el tamaño de la página
             articleController.getAllArticles(ctx, pageNumber);
         });

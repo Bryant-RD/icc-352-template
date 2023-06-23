@@ -1,26 +1,55 @@
-import { getArticlebyId } from "./api/article.controller.js";
+import { getArticlebyId, sendComment } from "./api/article.controller.js";
+import { getUserActive } from "./api/user.controller.js";
 
 const title = document.getElementById("title-article");
 const taglist = document.getElementById("tagList");
 const bodyArticle = document.getElementById("body-article");
 const username = document.getElementById("username");
 const commentsContainer = document.getElementById("comments-container");
+const comentario = document.getElementById("content");
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
+
+comentar.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  try {
+
+    const autor = await getUserActive()
+    const articulo = await getArticlebyId(id) 
+
+    articulo.article.fecha = null;
+    
+    const obj = {
+      id: Date.now(),
+      comentario: comentario.value,
+      autor: autor,
+      articulo: articulo.article
+    }
+  
+    const data = await sendComment(obj)
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 
 const showArticle = async () => {
 
     const article = await getArticlebyId(id);
 
-    title.innerText = `${article.titulo} - ${article.fecha}`
-    bodyArticle.innerText = article.cuerpo;
-    username.innerText = article.autor.username;
+    console.log(article);
+
+    title.innerText = `${article.article.titulo} - ${article.article.fecha}`
+    bodyArticle.innerText = article.article.cuerpo;
+    username.innerText = article.article.autor.username;
 
     article.etiquetas.forEach(tag => {
         const li = document.createElement("li");
-        li.innerText = tag;
+        li.innerText = tag.etiqueta;
 
         taglist.appendChild(li)
     });
@@ -44,7 +73,3 @@ const showArticle = async () => {
 }
 
 showArticle();
-
-
-
-console.log("El valor del parámetro 'id' es: " + id);

@@ -1,18 +1,21 @@
 package blog.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
 import com.google.gson.Gson;
 import jakarta.persistence.*;
 
 import blog.DB.DB;
+import blog.DB.FotoServices;
 import blog.DB.GestionDb;
 import blog.encapsulaciones.Article;
+import blog.encapsulaciones.Foto;
 import blog.encapsulaciones.Message;
 import blog.encapsulaciones.User;
 import io.javalin.http.Context;
@@ -21,6 +24,7 @@ import io.javalin.http.Context;
 public class UserController {
 
     private GestionDb<User> gestionDb = GestionDb.getInstance(User.class);
+    private FotoServices fotoServices = FotoServices.getInstancia();
 
     public void loginUser(Context context) {
         String username = context.formParam("username");
@@ -89,14 +93,13 @@ public class UserController {
     
     public void createUser(Context context) {
 
-        String username = context.formParam("username");
-        String name = context.formParam("name");
-        String password = context.formParam("password");
+        Gson gson = new Gson();
+        User newUser = gson.fromJson(context.body(), User.class);
 
 
         EntityManager em = gestionDb.getEntityManager();
         Query query = em.createQuery("select u from User u where u.username like: username");
-        query.setParameter("username", username+"%");
+        query.setParameter("username", newUser.getUsername()+"%");
         List<User> aux = query.getResultList();
 
         
@@ -107,18 +110,16 @@ public class UserController {
 
             String id = uuid.toString();
 
-            User newUser = new User(id, username, name, password, "Usuario");
+            newUser.setUserId(id);
 
             EntityManager entityManager = gestionDb.getEntityManager();
             EntityTransaction transaction = entityManager.getTransaction();
+
             transaction.begin();
             
             entityManager.persist(newUser);
         
             transaction.commit();
-
-            Gson gson = new Gson();
-
 
             String json = gson.toJson(newUser);
 
@@ -129,7 +130,6 @@ public class UserController {
 
         } else {
             Message msg = new Message("Error", "Error al regitrar usuario");
-            Gson gson = new Gson();
             String json = gson.toJson(msg);
 
             context.contentType("application/json").result(json);
@@ -151,17 +151,13 @@ public class UserController {
     }
 
     public void deleteUser(Context context) {
-        String userId = context.pathParam("userId");
+        String userId = context.pathParam("id");
 
-        EntityManager em = gestionDb.getEntityManager();
-        Query query = em.createQuery("select u from User u where u.id_user = userId");
-        query.setParameter("userId", userId);
-        List<User> lista = query.getResultList();
+        EntityManager entityManager = gestionDb.getEntityManager();
 
-        if (!lista.isEmpty()) {
-            User user = lista.get(0);
+        User user = entityManager.find(User.class, userId);
 
-            EntityManager entityManager = gestionDb.getEntityManager();
+        if (user != null) {
             EntityTransaction transaction = entityManager.getTransaction();
             transaction.begin();
 
@@ -170,6 +166,8 @@ public class UserController {
             transaction.commit();
         }
     }
+
+
 
 
 }

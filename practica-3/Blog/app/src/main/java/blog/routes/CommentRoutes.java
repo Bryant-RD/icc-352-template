@@ -6,10 +6,12 @@ import io.javalin.Javalin;
 
 public class CommentRoutes {
         public static void configure(Javalin app) {
+
+            CommentController commentController = new CommentController();
         // app.get("/commets", CommentController::getAllCommets);
 
         // app.get("/commet/{idArticle}", CommentController::getCommetsByArticle);
-        // app.post("/create-comment", CommentController::createComment);
+        app.post("/create-comment", ctx -> commentController.createComment(ctx));
         // app.put("/update-comment", CommentController::updateComment);
         // app.delete("/delete-comment/{id}", CommentController::deleteComment);
 
