@@ -5,7 +5,7 @@ const username = document.getElementById("username");
 const name = document.getElementById("name");
 const pass1 = document.getElementById("password");
 const pass2 = document.getElementById("confirmPassword");
-const inputImagen = document.getElementById('imagen');
+const inputImagen = document.getElementById('foto');
 
 
 const titulo = document.getElementById("titulo");
@@ -53,31 +53,34 @@ registrar.addEventListener("click", async (e) => {
 
         console.log(obj);
        actionArticle = await createUser(obj)
-       window.location.href = "/login.html"
+
+       
+    //    window.location.href = "/login.html"
     }
 })
 
 
 inputImagen.addEventListener("change", () => {
-
     const file = inputImagen.files[0];
-
-  // Verificar si se seleccionó un archivo
-  if (file) {
-    // Leer el archivo como base64
-    const reader = new FileReader();
-    reader.onload = () => {
-      // Crear el objeto JSON que contendrá la imagen
-      foto = {
-        id: Date.now(),
-        nombre: file.name,
-        mimeType: file.type,
-        fotoBase64: reader.result,
-        }
-      }
-    }   
-        
-})
+  
+    // Verificar si se seleccionó un archivo
+    if (file) {
+      // Leer el archivo como base64
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Crear el objeto JSON que contendrá la imagen
+        let aux = {
+          id: Date.now(),
+          nombre: file.name,
+          mimeType: file.type,
+          fotoBase64: reader.result
+        };
+        foto = aux;
+      };
+      reader.readAsDataURL(file); // Leer el archivo como base64
+    }
+  });
+  
 
 
 const printUserEditing = () => {

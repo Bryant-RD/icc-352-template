@@ -114,6 +114,18 @@ export const getUserActive = async () => {
     }
 }
 
+export const getArticlesByUserId = async (id) => {
+  try {
+    const userId = await fetchProfileData();
+    const response = await fetch(`/user-articles/${userId}`);
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export const LogOut = async () => {
  
   fetch('/logout', {

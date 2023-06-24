@@ -18,7 +18,7 @@ public class User {
   
     private String rol;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
     private Foto foto;
 

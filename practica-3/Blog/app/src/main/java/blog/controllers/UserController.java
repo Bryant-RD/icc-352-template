@@ -1,8 +1,11 @@
 package blog.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +13,16 @@ import java.util.UUID;
 
 import com.google.gson.Gson;
 import jakarta.persistence.*;
+import jakarta.servlet.http.Cookie;
+
+import org.jasypt.util.text.BasicTextEncryptor;
 
 import blog.DB.DB;
 import blog.DB.FotoServices;
 import blog.DB.GestionDb;
 import blog.encapsulaciones.Article;
 import blog.encapsulaciones.Foto;
+import blog.encapsulaciones.LogUser;
 import blog.encapsulaciones.Message;
 import blog.encapsulaciones.User;
 import io.javalin.http.Context;
@@ -29,8 +36,7 @@ public class UserController {
     public void loginUser(Context context) {
         String username = context.formParam("username");
         String password = context.formParam("password");
-
-        System.out.println(username + " - " + password);
+        boolean rememberMe = context.formParam("rememberMe") != null;
 
         if (username.isEmpty() || password.isEmpty()) {
             context.redirect("/login.html");
@@ -44,7 +50,6 @@ public class UserController {
 
         List<User> users = query.getResultList();
 
-        System.out.println(users.size());
 
         if (users.isEmpty()) {
             context.redirect("/login.html");
@@ -54,13 +59,53 @@ public class UserController {
         User user = users.get(0);
 
         context.sessionAttribute("userId", user.getUserId()); // Establecer un atributo de sesión
+
+        LocalDateTime now = LocalDateTime.now();
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+
+        LogUser loguser = new LogUser(user.getUserId(), user.getUsername(), formattedDateTime);
+
+        EntityManager emn = gestionDb.getEntityManagerNube();
+        EntityTransaction transactionNube = emn.getTransaction();
+
+        transactionNube.begin();
+            
+        emn.persist(loguser);
+        
+        transactionNube.commit();
+
+
+        if (rememberMe) {
+            System.out.println("no hay cookie");
+            BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+            textEncryptor.setPassword("clave_encriptacion");
+
+            String encryptedUsername = textEncryptor.encrypt(user.getUserId().toString());
+
+            Cookie cookie = new Cookie("rememberMe", encryptedUsername);
+            cookie.setMaxAge(7 * 24 * 60 * 60); // Establece el tiempo de vida de la cookie en segundos (opcional)
+            context.res().addCookie(cookie);
+        } else {
+            System.out.println("hay cookie");
+            Cookie cookie = new Cookie("rememberMe", "");
+            cookie.setMaxAge(0); 
+        }
+
         context.redirect("/home.html");
+
     }
 
 
     public void logOutUser(Context context) {
-        context.sessionAttribute("userId", null); // Establecer un atributo de sesión
+        context.sessionAttribute("userId", null);
+        
+        Cookie rememberMeCookie = new Cookie("rememberMe", "");
+        rememberMeCookie.setMaxAge(0);
+        context.res().addCookie(rememberMeCookie);
         context.redirect("/homeLogOut.html");
+        
     }
     
     public void getAllUsers(Context context) {
@@ -86,6 +131,7 @@ public class UserController {
         List<User> lista = query.getResultList();
 
 		Gson gson = new Gson();
+        System.out.println(lista);
         String json = gson.toJson(lista.get(0));
 
         context.contentType("application/json").result(json);
@@ -95,6 +141,9 @@ public class UserController {
 
         Gson gson = new Gson();
         User newUser = gson.fromJson(context.body(), User.class);
+        
+
+        System.out.println(newUser.getFoto().getId());
 
 
         EntityManager em = gestionDb.getEntityManager();

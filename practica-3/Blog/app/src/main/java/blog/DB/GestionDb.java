@@ -3,6 +3,10 @@ package blog.DB;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaQuery;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -16,6 +20,7 @@ import java.util.StringTokenizer;
 public class GestionDb<T> {
 
     private static EntityManagerFactory emf;
+    private static EntityManagerFactory emfn;
     private Class<T> claseEntidad;
     private static GestionDb<?> instance;
 
@@ -27,6 +32,7 @@ public class GestionDb<T> {
         if (instance == null) {
             instance = new GestionDb<>(claseEntidad);
             emf = Persistence.createEntityManagerFactory("MiUnidadPersistencia");
+            emfn = Persistence.createEntityManagerFactory("DataBaseNube");
         }
         return (GestionDb<T>) instance;
     }
@@ -34,6 +40,30 @@ public class GestionDb<T> {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+
+    public EntityManager getEntityManagerNube() {
+        getConfiguracionBaseDatosNube();
+        return emfn.createEntityManager();
+    }
+
+
+    private EntityManagerFactory getConfiguracionBaseDatosNube() {
+
+        Dotenv dotenv = Dotenv.configure().load();
+
+        String dbUrl = dotenv.get("JDBC_DATABASE_URL");
+        String dbUsername = dotenv.get("USER_DATABASE");
+        String dbPassword = dotenv.get("PASSWORD_DATABASE");
+
+        Map<String, String> properties = new HashMap<>();
+        properties.put("javax.persistence.jdbc.url", dbUrl );
+        properties.put("javax.persistence.jdbc.user", dbUsername );
+        properties.put("javax.persistence.jdbc.password", dbPassword );
+        //
+        return Persistence.createEntityManagerFactory("DataBaseNube", properties);
+
+    }
+
 
     public T crear(T entidad) throws IllegalArgumentException, EntityExistsException, PersistenceException {
         EntityManager em = getEntityManager();

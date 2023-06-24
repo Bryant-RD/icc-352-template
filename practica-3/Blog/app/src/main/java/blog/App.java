@@ -8,10 +8,14 @@ import blog.routes.CommentRoutes;
 import blog.routes.TagRoutes;
 import blog.routes.UserRoutes;
 import io.javalin.Javalin;
+import jakarta.servlet.http.Cookie;
+
+import java.util.Map;
 
 import javax.naming.spi.DirStateFactory.Result;
 
 import com.google.gson.Gson;
+import org.jasypt.util.text.BasicTextEncryptor;
 
 public class App {
     public String getGreeting() {
@@ -26,6 +30,22 @@ public class App {
             });
 
         }).start(8080);
+
+        app.before(ctx -> {
+            // Verificar si la cookie de recordar usuario existe
+            Map<String, String> cookieMap = ctx.cookieMap();
+            String rememberMeCookieValue = cookieMap.get("rememberMe");
+            if (rememberMeCookieValue != null) {
+                Cookie rememberMeCookie = new Cookie("rememberMe", rememberMeCookieValue);
+                String encryptedUsername = rememberMeCookie.getValue();
+                BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+                textEncryptor.setPassword("clave_encriptacion");
+                String decryptedUsername = textEncryptor.decrypt(encryptedUsername);
+
+                // Establecer la sesión del usuario automáticamente
+                ctx.sessionAttribute("userId", decryptedUsername);
+            }
+        });
 
         app.before("/home.html", ctx -> {
             boolean sessionExists = ctx.sessionAttribute("userId") != null; // Verificar si la sesión existe

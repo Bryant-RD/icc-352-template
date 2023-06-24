@@ -32,7 +32,7 @@ const showArticlesList = async() => {
                     break;
 
                 case "autor":
-                    window.location.href = `/profile.html?id=${item.article.id}`;
+                    window.location.href = `/profile.html?id=${item.article.autor.userId}`;
                     break;
                 
                 case "editButton":

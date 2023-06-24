@@ -16,11 +16,13 @@ body {
   }
 
   .profile-image {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    background-color: #00589b;
+    /* background-color: #00589b; */
+    object-fit: cover;
   }
+
 
   .profile-info {
     margin-left: 20px;
