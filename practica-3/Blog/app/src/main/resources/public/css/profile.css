@@ -45,14 +45,16 @@ body {
   }
 
   .article {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     background-color: #ffffff;
     border: 1px solid #00589b;
-    /* padding: 10px; */
-    margin-bottom: 20px;
+    padding: 5px;
+    margin: 1rem;
     width: 20%;
-    margin: auto 1rem;
     border-radius: 10px;
+    cursor: pointer;
   }
 
   .article-title {
@@ -74,6 +76,8 @@ body {
     width: 85%;
     margin: auto;
     flex-wrap: wrap;
+    justify-content: center;
+    
   }
 
   .tagArticle {

@@ -32,7 +32,7 @@ public class GestionDb<T> {
         if (instance == null) {
             instance = new GestionDb<>(claseEntidad);
             emf = Persistence.createEntityManagerFactory("MiUnidadPersistencia");
-            emfn = Persistence.createEntityManagerFactory("DataBaseNube");
+            // emfn = Persistence.createEntityManagerFactory("DataBaseNube");
         }
         return (GestionDb<T>) instance;
     }
@@ -41,28 +41,28 @@ public class GestionDb<T> {
         return emf.createEntityManager();
     }
 
-    public EntityManager getEntityManagerNube() {
-        getConfiguracionBaseDatosNube();
-        return emfn.createEntityManager();
-    }
+    // public EntityManager getEntityManagerNube() {
+    //     getConfiguracionBaseDatosNube();
+    //     return emfn.createEntityManager();
+    // }
 
 
-    private EntityManagerFactory getConfiguracionBaseDatosNube() {
+    // private EntityManagerFactory getConfiguracionBaseDatosNube() {
 
-        Dotenv dotenv = Dotenv.configure().load();
+    //     Dotenv dotenv = Dotenv.configure().load();
 
-        String dbUrl = dotenv.get("JDBC_DATABASE_URL");
-        String dbUsername = dotenv.get("USER_DATABASE");
-        String dbPassword = dotenv.get("PASSWORD_DATABASE");
+    //     String dbUrl = dotenv.get("JDBC_DATABASE_URL");
+    //     String dbUsername = dotenv.get("USER_DATABASE");
+    //     String dbPassword = dotenv.get("PASSWORD_DATABASE");
 
-        Map<String, String> properties = new HashMap<>();
-        properties.put("javax.persistence.jdbc.url", dbUrl );
-        properties.put("javax.persistence.jdbc.user", dbUsername );
-        properties.put("javax.persistence.jdbc.password", dbPassword );
-        //
-        return Persistence.createEntityManagerFactory("DataBaseNube", properties);
+    //     Map<String, String> properties = new HashMap<>();
+    //     properties.put("javax.persistence.jdbc.url", dbUrl );
+    //     properties.put("javax.persistence.jdbc.user", dbUsername );
+    //     properties.put("javax.persistence.jdbc.password", dbPassword );
+    //     //
+    //     return Persistence.createEntityManagerFactory("DataBaseNube", properties);
 
-    }
+    // }
 
 
     public T crear(T entidad) throws IllegalArgumentException, EntityExistsException, PersistenceException {
