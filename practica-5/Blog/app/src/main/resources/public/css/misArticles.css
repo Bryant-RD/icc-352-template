@@ -1,0 +1,103 @@
+body {
+    background-color: #e9eef8;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.title-article {
+    color: #00589b;
+    text-align: center;
+}
+
+.container-articles {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+}
+
+.deleteButton {
+
+  background-color: red;
+  color: white;
+  padding: 0.3rem;
+  font-weight: bold;
+  display: inline-block;
+  width: fit-content;
+  margin-left: 2rem;
+  border-radius: 3px;
+}
+
+td > a {
+    text-decoration: none;
+    color: black;
+}
+
+td > a:hover {
+  cursor: pointer;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 2.5rem;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid white;
+  }
+  td {
+    font-size: 0.8rem;
+  }
+  tr:hover {
+    color: #00589b;
+  }
+  
+  th {
+    background-color: #00589b;
+    color: white;
+  }
+  
+  td.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  td.actions > a {
+    color: #00589b;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+td.actions > a:hover {
+    color: black;
+    /* font-weight: bolder; */
+}
+
+
+  .new-article {
+    background: #00589b ;
+    display: block;
+    text-align: center;
+    width: 8rem;
+    margin-left: 75%;
+    padding: 0.5rem 0;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+
+  }
+
+  .new-article:hover {
+    transform: translateY(-5px);
+    font-size: 1.05rem;
+  }

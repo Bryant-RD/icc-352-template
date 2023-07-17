@@ -1,0 +1,208 @@
+body {
+    background-color: #e9eef8;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+  
+
+  .section-article {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title-section {
+    text-align: center;
+    color: #00589b;
+  }
+  
+  #article-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+
+  .active {
+    color: white;
+    font-weight: bold;
+    background-color:#00589b;
+
+    cursor: pointer;
+    border:solid 1px #00589b;
+    padding: 0.3rem 0.5rem;
+    margin: auto 2px;
+    border-radius: 5px;
+  }
+
+  .article {
+    background-color: #e9eef8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 35%;
+    cursor: pointer;
+    margin: 0.5rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-show-more {
+    background: #00589b;
+    color: white;
+    width: 10rem;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin-left: 40%;
+    cursor: pointer;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+  }
+
+  .button-show-more:hover {
+    transform: translateY(-5px);
+    font-size: 1.05rem;
+  }
+  
+  .article:hover {
+    transform: translateY(-3px);
+  }
+  
+  .title-article {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00589b;
+    margin-bottom: 10px;
+  }
+  
+  .title-article span {
+    font-weight: normal;
+    color: #666;
+  }
+  
+  .text-article {
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  .author-article {
+    color: #666;
+    font-style: italic;
+  }
+  
+
+  .more-articles {
+    
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+  }
+
+  .container-tags {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+  }
+
+  .list-tags > .tag {
+    width: 100%;
+    cursor: pointer;
+  }
+
+
+
+  .list-views .list-comments .list-tags {
+    display: flex;
+    padding: 0.5rem;
+    width: 33%;
+    justify-content: center;
+
+  }
+
+  .list-views > .article {
+    width: 95%;
+    margin: 1rem 0;
+    margin-left: 1rem;
+  }
+
+
+  .list-comments > .article {
+    width: 95%;
+    margin: 1rem 0;
+  }
+
+  .tag {
+    background: #00589b;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+  }
+
+  .tag:hover {
+    transform: translateY(-5px);
+    font-size: 1.05rem;
+  }
+
+  .paginationContainer {
+    display: flex;
+    width: 30%; 
+    margin: auto;
+    justify-content: space-around;
+  }
+
+  #pagination {
+    display: flex;
+    text-align: center;
+
+    
+  }
+
+  .flecha {
+    font-weight: bold;
+    padding: 0.3rem 0.5rem;
+    background-color: #00589b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+  }
+
+  .itemPag {
+    cursor: pointer;
+    border:solid 1px #00589b;
+    padding: 0.3rem 0.5rem;
+    margin: auto 2px;
+    border-radius: 5px;
+  }
+
+  .chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    width: 10rem;
+    padding: 0.01rem;
+    padding-top: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+
+  .chat > img {
+    margin-left: 0.7rem;
+  }

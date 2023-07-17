@@ -1,0 +1,85 @@
+body {
+    background-color: #e9eef8;
+    font-family: Arial, sans-serif;
+    color: #00589b;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0.5rem;
+    /* margin-bottom: 20px; */
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* background-color: #00589b; */
+    object-fit: cover;
+  }
+
+
+  .profile-info {
+    margin-left: 20px;
+  }
+
+  .profile-username {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .profile-name {
+    font-size: 18px;
+  }
+
+  .article-section {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #00589b;
+    padding: 5px;
+    margin: 1rem;
+    width: 20%;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .article-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .article-content {
+    font-size: 16px;
+    width: 85%;
+    margin: 1rem auto;
+  }
+
+  .tagsArticle {
+    margin-top: 0px;
+    background-color: antiquewhite;
+    display: flex;
+    width: 85%;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+
+  .tagArticle {
+    margin: auto 0.5rem;
+  }

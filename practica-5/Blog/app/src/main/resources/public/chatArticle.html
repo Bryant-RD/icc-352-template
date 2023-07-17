@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="./css/chatArticle.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navegator">
+            <ul class="ul-navegator">
+                <li class="li-navegator" ><a href="/">Home</a></li>
+                <li class="li-navegator"><a href="/profile.html">Perfil</a></li>
+                <li class="li-navegator"><a href="/newArticle.html">Nuevo articulo</a></li>
+                <li class="li-navegator"><a href="/misArticulos.html" >Mis articulos</a></li> <!-- style="text-decoration: none;" -->
+                <li class="li-navegator" id="admin-users"><a href="/adminUser.html">Administrar usuarios</a></li>
+                <li class="li-navegator" id="login"><a>Cerrar sesion</a></li>
+            </ul>
+        </nav>
+        <div>
+            <p>Carrousel here</p>
+        </div>
+    </header>
+    <div class="chat-container">
+        <div class="chat-header">
+          <h2 id="chat-tittle">Chat</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <!-- Aquí se mostrarán los mensajes -->
+        </div>
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Escribe tu mensaje..." autocomplete="none"/>
+          <button id="send-button">Enviar</button>
+        </div>
+      </div>
+    <footer>
+
+    </footer>
+    <script type="module" src="./js/chatArticle.js"></script>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+</body>
+</html>

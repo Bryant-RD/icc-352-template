@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/misArticles.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <header>
+            <nav class="navegator">
+              <ul class="ul-navegator">
+                <li class="li-navegator" ><a href="/">Home</a></li>
+                <li class="li-navegator"><a href="/profile.html">Perfil</a></li>
+                <li class="li-navegator"><a href="/newArticle.html">Nuevo articulo</a></li>
+                <li class="li-navegator"><a href="/misArticulos.html" >Mis articulos</a></li> <!-- style="text-decoration: none;" -->
+                <li class="li-navegator" id="admin-users"><a href="/adminUser.html">Administrar usuarios</a></li>
+                <li class="li-navegator" id="login"><a href="">Cerrar sesion</a></li>
+            </ul>
+          </nav>
+        </header>
+        <section class="container-articles">
+            <h2 class="title-article">Chats activos</h2>
+            <aside class="list-articles">
+                <table>
+                    <thead>
+                      <tr>
+                        <th>ID chat</th>
+                        <th>User Name</th>
+                        <th>Hora</th>
+                        <th>eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <!-- ARTICULOS HERE -->
+                      <tr>
+                        <td>1</td>
+                        <td>joselito</td>
+                        <td>10:30 AM</td>
+                        <td style="padding: 0;" ><p class="deleteButton" >X</p></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </aside>
+        </section>
+        <script src="./js/adminChats.js" type="module"></script>
+    </body>
+</body>
+</html>
