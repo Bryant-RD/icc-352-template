@@ -1,6 +1,9 @@
 
+const tableBody = document.getElementById("tableBody");
+
+
 var webSocket;
-var tiempoReconectar = 5000;
+var tiempoReconectar = 1000;
 
 
 conectar();
@@ -8,8 +11,52 @@ conectar();
 
 function recibirInformacionServidor(mensaje) {
 
+
+  while (tableBody.firstChild) {
+      tableBody.firstChild.remove();
+  }
+
     const json = JSON.parse(mensaje.data)
-    console.log(json)
+
+    console.log(json);
+    console.log(json.length);
+
+
+    if (json.length > 0) {
+
+      json.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.className = "row"
+        tr.id = "row"
+        tr.innerHTML = `
+        <td id='idChat' >${item.salaId}</td>
+        <td>${item.hora}</td>
+        <td>${item.mensajes}</td>
+        <td style="padding: 0;" ><p class="deleteButton" >X</p></td>
+        `;
+
+        tr.addEventListener("click", (e) => {
+          if (e.target.classList.contains("deleteButton")) {
+                //TODO: Eliminar sala
+                console.log("Eliminar sala: " + item.salaId);
+              } else {
+                window.location.href = `chatArticle.html?id=${item.salaId}`
+              }
+        })
+
+        // document.getElementById("row").addEventListener("click", (e) => {
+        //   if (e.target.classList.contains("deleteButton")) {
+        //     console.log("adentro");
+        //   } else {
+        //     const idChat = document.getElementById("idChat")
+        //     window.location.href = `chatArticle.html?id=${idChat}`
+        //   }
+        // })
+  
+        tableBody.appendChild(tr)
+
+      });
+    }
 
 }
 

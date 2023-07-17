@@ -40,6 +40,9 @@ td > a:hover {
   cursor: pointer;
 }
 
+.row {
+  cursor: pointer;
+}
 
 table {
     width: 100%;

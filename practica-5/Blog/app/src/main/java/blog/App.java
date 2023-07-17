@@ -16,9 +16,13 @@ import org.eclipse.jetty.websocket.api.Session;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import org.jasypt.util.text.BasicTextEncryptor;
 
 public class App {
@@ -166,11 +170,45 @@ public class App {
                      * vista de todos los chats
                      */
 
+
                     if (chatId.equalsIgnoreCase("admin")) {
-                        System.out.println(DB.initDB().getSalas().toString());
-                        // ctx.session.getRemote().sendString(DB.initDB().getSalas().toString());
-                        return;
+                    Map<String, Map<String, Session>> salas = DB.initDB().getSalas();
+                    Set<String> salaIds = salas.keySet();
+
+                    // Crear un arreglo JSON para almacenar las salas y sesiones
+                    JsonArray salaArray = new JsonArray();
+
+                    // Iterar sobre las salas
+                    for (String salaId : salaIds) {
+                        // Obtener el mapa de sesiones para la sala actual
+                        Map<String, Session> sesionesSala = salas.get(salaId);
+
+                        // Obtener la fecha y hora actual como un objeto Date
+                        Date fechaHoraActual = new Date();
+
+                        // Crear un formato para la cadena de fecha y hora deseada
+                        SimpleDateFormat formatoFechaHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        // Convertir el objeto Date a una cadena de fecha y hora
+                        String fechaHoraString = formatoFechaHora.format(fechaHoraActual);
+
+                        // Crear un objeto JSON para la sala actual
+                        JsonObject salaObj = new JsonObject();
+                        salaObj.addProperty("salaId", salaId);
+                        salaObj.addProperty("hora", fechaHoraString);
+                        salaObj.addProperty("mensajes", DB.initDB().getSalas().get(salaId).size());
+                        salaArray.add(salaObj);
                     }
+
+                    // Convertir el arreglo salaArray a un string JSON
+                    String jsonString = new Gson().toJson(salaArray);
+
+                    // Enviar el string JSON al cliente
+                    ctx.session.getRemote().sendString(jsonString);
+
+                    return;
+                }
+                    
 
                     DB.initDB().getSalas().putIfAbsent(chatId, new HashMap<>());
 
@@ -227,7 +265,9 @@ public class App {
                     String chatId = pathParams.get("chatId");
                     System.out.println("CHAT ID: " + chatId);
 
-                    DB.initDB().getSalas().get(chatId).remove(ctx.getSessionId());
+                    if (!chatId.equalsIgnoreCase("admin")) {
+                        DB.initDB().getSalas().get(chatId).remove(ctx.getSessionId());
+                    }
                 });
     
                 ws.onError(ctx -> {
