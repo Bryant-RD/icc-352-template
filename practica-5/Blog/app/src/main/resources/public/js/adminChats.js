@@ -38,6 +38,16 @@ function recibirInformacionServidor(mensaje) {
         tr.addEventListener("click", (e) => {
           if (e.target.classList.contains("deleteButton")) {
                 //TODO: Eliminar sala
+                let obj = {
+                  title: "delete",
+                  message: item.salaId
+                }
+
+                let jsonData = JSON.stringify(obj);
+                webSocket.send(jsonData)
+
+                console.log(e.target.parentNode.parentNode.remove());
+
                 console.log("Eliminar sala: " + item.salaId);
               } else {
                 window.location.href = `chatArticle.html?id=${item.salaId}`

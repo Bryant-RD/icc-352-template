@@ -65,8 +65,17 @@ $(document).ready(function(){
 });
 
 function recibirInformacionServidor(mensaje){
+
+  if (mensaje.data == "sala eliminada") {
+
+    alert("Chat cerrado")
+
+    window.location.href = "homeLogOut.html"
+  
+    return;
+  }
   const json = JSON.parse(mensaje.data)
-  console.log(json)
+  // console.log(json)
 
 
   if (Array.isArray(json)) {

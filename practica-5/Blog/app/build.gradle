@@ -50,6 +50,13 @@ dependencies {
 
 }
 
+shadowJar{
+    archiveBaseName.set("app")
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+
 testing {
     suites {
         // Configure the built-in test suite

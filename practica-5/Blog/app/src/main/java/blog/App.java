@@ -165,13 +165,10 @@ public class App {
                     String chatId = pathParams.get("chatId");
                     System.out.println("CHAT ID: " + chatId);
 
-                    /*
-                     * TODO: Terminar se enviar las salas cuando un administrador se conecta al socket entrando a la
-                     * vista de todos los chats
-                     */
+
+                    DB.initDB().getSalas().putIfAbsent("admin", new HashMap<>());
 
 
-                    if (chatId.equalsIgnoreCase("admin")) {
                     Map<String, Map<String, Session>> salas = DB.initDB().getSalas();
                     Set<String> salaIds = salas.keySet();
 
@@ -202,17 +199,36 @@ public class App {
 
                     // Convertir el arreglo salaArray a un string JSON
                     String jsonString = new Gson().toJson(salaArray);
+                    System.out.println(jsonString);
 
-                    // Enviar el string JSON al cliente
-                    ctx.session.getRemote().sendString(jsonString);
+                        // Enviar el string JSON al cliente
+                        for(Session sesionConectada : DB.initDB().getSalas().get("admin").values()){
+                            try {
+                                if (sesionConectada.isOpen()) {
+                                    sesionConectada.getRemote().sendString(jsonString);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    }
 
-                    return;
-                }
+
+
+
+                    if (chatId.equalsIgnoreCase("admin")) {
+                    DB.initDB().getSalas().get(chatId).put(ctx.getSessionId(), ctx.session);
+
+
+
+                        return;
+                    }
                     
 
                     DB.initDB().getSalas().putIfAbsent(chatId, new HashMap<>());
 
                     DB.initDB().getSalas().get(chatId).put(ctx.getSessionId(), ctx.session);
+
+                    
 
                     // Obtener los mensajes previos de la sala
                     StringBuilder mensajesSala = DB.initDB().getMensajesSalas().get(chatId);
@@ -238,14 +254,26 @@ public class App {
                 });
     
                 ws.onMessage(ctx -> {
-                    //Puedo leer los header, parametros entre otros.
-                    ctx.headerMap();
-                    ctx.pathParamMap();
-                    ctx.queryParamMap();
 
                     Map<String, String> pathParams = ctx.pathParamMap();
                     String chatId = pathParams.get("chatId");
                     System.out.println("CHAT ID: " + chatId);
+
+
+                    if (chatId.equalsIgnoreCase("admin")) {
+                        Gson gson = new Gson();
+                        Message msg = gson.fromJson(ctx.message(), Message.class);
+                        
+                        if (msg.getTitle().equalsIgnoreCase("delete")) {
+
+                            enviarMensajeAClientesConectados("sala eliminada", msg.getMessage());
+                            DB.initDB().getSalas().get(msg.getMessage()).clear();
+                            DB.initDB().getSalas().remove(msg.getMessage());
+                            System.out.println("sala eliminada" + ctx.message());
+
+                        }
+                        return;
+                    }
 
                     // Mostrando mensaje en consola
                     System.out.println("Mensaje Recibido de "+ctx.getSessionId()+" ====== ");
@@ -266,7 +294,12 @@ public class App {
                     System.out.println("CHAT ID: " + chatId);
 
                     if (!chatId.equalsIgnoreCase("admin")) {
-                        DB.initDB().getSalas().get(chatId).remove(ctx.getSessionId());
+                        try {
+                            DB.initDB().getSalas().get(chatId).remove(ctx.getSessionId());
+                            
+                        } catch (Exception e) {
+                            System.out.println(e.toString());
+                        }
                     }
                 });
     
