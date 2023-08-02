@@ -28,7 +28,7 @@
         <class>blog.encapsulaciones.LogUser</class>
 
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value= "jdbc:postgresql://bd-blog-log-11540.7tt.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&amp;password=uzIJQEbMDZjGGgVQls2Smw&amp;user=bryant" />
+            <property name="jakarta.persistence.jdbc.url" value= "jdbc:postgresql://bd-blog-log-11540.7tt.cockroachlabs.cloud:26257/defaultdb?&amp;password=uzIJQEbMDZjGGgVQls2Smw&amp;user=bryant" />
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.user" value="bryant" />
             <property name="jakarta.persistence.jdbc.password" value="A2q3VCk7VM7UnmhtQZDftg" />
