@@ -60,22 +60,6 @@ public class UserController {
 
         context.sessionAttribute("userId", user.getUserId()); // Establecer un atributo de sesión
 
-        // LocalDateTime now = LocalDateTime.now();
-        
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        // String formattedDateTime = now.format(formatter);
-
-        // LogUser loguser = new LogUser(user.getUserId(), user.getUsername(), formattedDateTime);
-
-        // EntityManager emn = gestionDb.getEntityManagerNube();
-        // EntityTransaction transactionNube = emn.getTransaction();
-
-        // transactionNube.begin();
-            
-        // emn.persist(loguser);
-        
-        // transactionNube.commit();
-
 
         if (rememberMe) {
             System.out.println("no hay cookie");
@@ -168,11 +152,11 @@ public class UserController {
             transaction.commit();
 
             String json = gson.toJson(newUser);
+            System.out.println(json);
 
             System.out.println("registrado");
 
             context.contentType("application/json").result(json);
-            context.redirect("/homeLogOut.html");
 
         } else {
             Message msg = new Message("Error", "Error al regitrar usuario");

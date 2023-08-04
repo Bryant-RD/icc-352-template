@@ -3,7 +3,10 @@
  */
 package blog;
 import blog.DB.BootStrapServices;
+import blog.DB.GestionDb;
+import blog.controllers.UserController;
 import blog.encapsulaciones.Message;
+import blog.encapsulaciones.User;
 import blog.routes.ArticleRoutes;
 import blog.routes.CommentRoutes;
 import blog.routes.TagRoutes;
@@ -12,10 +15,12 @@ import io.javalin.Javalin;
 import jakarta.servlet.http.Cookie;
 
 import java.util.Map;
+import java.util.UUID;
 
 import javax.naming.spi.DirStateFactory.Result;
 
 import com.google.gson.Gson;
+import jakarta.persistence.*;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 public class App {
@@ -53,6 +58,22 @@ public class App {
                 ctx.sessionAttribute("userId", decryptedUsername);
             }
         });
+
+         UUID uuid = UUID.randomUUID();
+
+                String idAdmin = uuid.toString();
+                
+                User admin = new User(idAdmin, "admin", "admin", "admin", "administrador");
+
+                GestionDb<User> gestionDb = GestionDb.getInstance(User.class);
+                 EntityManager entityManager = gestionDb.getEntityManager();
+                 EntityTransaction transaction = entityManager.getTransaction();
+     
+                 transaction.begin();
+                 
+                 entityManager.persist(admin);
+             
+                 transaction.commit();
 
         app.before("/home.html", ctx -> {
             boolean sessionExists = ctx.sessionAttribute("userId") != null; // Verificar si la sesión existe
@@ -133,7 +154,8 @@ public class App {
 
             app.get("/", ctx -> {
                 ctx.redirect("/home.html");
-                // ctx.result("HOLA");
+
+               
             });
 
             app.get("/profile", ctx -> {
