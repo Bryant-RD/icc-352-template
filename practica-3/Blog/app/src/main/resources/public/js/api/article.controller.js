@@ -141,8 +141,6 @@ export const updateArticleById = async (id, obj) => {
             console.log("HTTP request unsuccessful");
         }
 
-        const data = await response.json();
-        return data
     } catch (error) {
         console.log(error);
     }

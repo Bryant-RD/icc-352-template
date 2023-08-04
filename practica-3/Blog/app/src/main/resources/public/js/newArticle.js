@@ -74,7 +74,7 @@ button.addEventListener("click", async () => {
 
     if (id != null) {
         obj = {
-            id: articleEditing.id,
+            id: id,
             titulo: titleArticle.value,
             cuerpo: bodyArticle.value,
             autor: user,
@@ -82,7 +82,7 @@ button.addEventListener("click", async () => {
             etiquetas: tags.map(tag => ({
                 id: tag.id,
                 etiqueta: tag.etiqueta,
-                articulo: articleEditing.id
+                articulo: articleEditing.article.id
             }))
         };
 
