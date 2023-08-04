@@ -141,9 +141,6 @@ public class UserController {
 
         Gson gson = new Gson();
         User newUser = gson.fromJson(context.body(), User.class);
-        
-
-        System.out.println(newUser.getFoto().getId());
 
 
         EntityManager em = gestionDb.getEntityManager();
