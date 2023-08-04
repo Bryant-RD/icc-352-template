@@ -173,11 +173,31 @@ public class UserController {
 
         EntityManager entityManager = gestionDb.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
 
-        entityManager.merge(newUser);
+        try {
+            transaction.begin();
 
-        transaction.commit();
+            User existinUser = entityManager.find(User.class, newUser.getUserId());
+            if (existinUser != null) {
+                existinUser.setNombre(newUser.getNombre());
+                existinUser.setUsername(newUser.getUsername());
+                existinUser.setFoto(newUser.getFoto());
+                existinUser.setPassword(newUser.getPassword());
+                
+
+                // Actualizar otras propiedades según corresponda
+
+                entityManager.merge(existinUser);
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } finally {
+            entityManager.close();
+        }
     }
 
     public void deleteUser(Context context) {
