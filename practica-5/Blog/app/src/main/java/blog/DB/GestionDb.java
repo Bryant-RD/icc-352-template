@@ -32,7 +32,7 @@ public class GestionDb<T> {
         if (instance == null) {
             instance = new GestionDb<>(claseEntidad);
             emf = Persistence.createEntityManagerFactory("MiUnidadPersistencia");
-            // emfn = Persistence.createEntityManagerFactory("DataBaseNube");
+            emfn = Persistence.createEntityManagerFactory("DataBaseNube");
         }
         return (GestionDb<T>) instance;
     }

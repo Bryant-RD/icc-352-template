@@ -21,8 +21,10 @@ let tags = [];
 const printArticleEditing = () => {
     
 
-    titleArticle.value = articleEditing.titulo;
-    bodyArticle.value = articleEditing.cuerpo;
+    titleArticle.value = articleEditing.article.titulo;
+    bodyArticle.value = articleEditing.article.cuerpo;
+
+    console.log(articleEditing);
 
     articleEditing.etiquetas.forEach(item => {
         const tag = document.createElement("p");
@@ -39,18 +41,6 @@ if (id != null) {
     title.innerText = "Editar Articulo";
     articleEditing = await getArticlebyId(id);
     printArticleEditing();
-    tags = articleEditing.etiquetas;
-
-    tags.forEach(item => {
-    const tag = document.createElement("p");
-    tag.className = "tag"
-
-    tag.innerText = tag.etiqueta;
-
-    containerTagList.appendChild(tag)
-    });
-
-
 }
 
 
@@ -84,7 +74,7 @@ button.addEventListener("click", async () => {
 
     if (id != null) {
         obj = {
-            id: articleEditing.id,
+            id: id,
             titulo: titleArticle.value,
             cuerpo: bodyArticle.value,
             autor: user,

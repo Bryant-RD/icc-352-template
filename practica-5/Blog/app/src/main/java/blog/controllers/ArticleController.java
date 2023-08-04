@@ -210,6 +210,8 @@ public void getAllArticles(Context context, int pageNumber) {
         Gson gson = new Gson();
         Article newArticle = gson.fromJson(context.body(), Article.class);
 
+        // System.out.println(gson.toJson(newArticle));
+
         EntityManager entityManager = gestionDb.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
@@ -222,6 +224,8 @@ public void getAllArticles(Context context, int pageNumber) {
                 existingArticle.setCuerpo(newArticle.getCuerpo());
                 existingArticle.setAutor(newArticle.getAutor());
                 // Actualizar otras propiedades según corresponda
+
+                System.out.println("ENTRO");
 
                 entityManager.merge(existingArticle);
             }

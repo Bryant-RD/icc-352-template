@@ -55,7 +55,7 @@ registrar.addEventListener("click", async (e) => {
        actionArticle = await createUser(obj)
 
        
-    //    window.location.href = "/login.html"
+       window.location.href = "/login.html"
     }
 })
 

@@ -3,14 +3,16 @@
  */
 package blog;
 import blog.DB.DB;
-
+import blog.DB.GestionDb;
 import blog.encapsulaciones.Message;
+import blog.encapsulaciones.User;
 import blog.routes.ArticleRoutes;
 import blog.routes.CommentRoutes;
 import blog.routes.TagRoutes;
 import blog.routes.UserRoutes;
 import io.javalin.Javalin;
-
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.servlet.http.Cookie;
 import org.eclipse.jetty.websocket.api.Session;
 
@@ -22,6 +24,8 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import jakarta.persistence.*;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 
@@ -58,6 +62,22 @@ public class App {
                 ctx.sessionAttribute("userId", decryptedUsername);
             }
         });
+
+        UUID uuid = UUID.randomUUID();
+
+                String idAdmin = uuid.toString();
+                
+                User admin = new User(idAdmin, "admin", "admin", "admin", "administrador");
+
+                GestionDb<User> gestionDb = GestionDb.getInstance(User.class);
+                 EntityManager entityManager = gestionDb.getEntityManager();
+                 EntityTransaction transaction = entityManager.getTransaction();
+     
+                 transaction.begin();
+                 
+                 entityManager.persist(admin);
+             
+                 transaction.commit();
 
         app.before("/home.html", ctx -> {
             boolean sessionExists = ctx.sessionAttribute("userId") != null; // Verificar si la sesión existe
