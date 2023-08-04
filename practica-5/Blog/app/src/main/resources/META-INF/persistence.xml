@@ -15,7 +15,7 @@
 
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:/Users/Bryant Reynoso/Desktop/Programacion web - Javalin/bases de datos/MyH2DB" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/mi_h2" />
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="jakarta.persistence.jdbc.user" value="sa" />
             <property name="jakarta.persistence.jdbc.password" value="123456" />
