@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+  }
+
+  .container {
+    margin: auto;
+    margin-top: 15vh;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem 3rem;
+    width: 50%;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+  /*------------------------------------------CAMARA ------------------------------*/
+
+  #webcam {
+    display: block;
+  }
+
+  .show {
+    display: flex;
+  }
+
+  .hidde {
+    display: none;
+  }
+  .container-camara {
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem;
+  }
+  #take-picture {
+    margin: 1rem;
+  }
+
+  .test {
+    display: flex;
+    margin: auto;
+    
+  }
+
+  .mycheckbox input:checked ~ span::after{
+  background: rgb(12, 167, 12);
+  transform: scale(0.85) translate(35px);
+}
+.mycheckbox input:checked ~ span .on{
+  transform: translate(30px);
+  opacity: 1;
+}
+
+.mycheckbox input:checked ~ span .off{
+  transform: translate(30px);
+  opacity: 0;
+}
+
+.mycheckbox input:checked ~ span .on-bell{
+  transform: translate(31px);
+}
+
+.mycheckbox input {
+  display: none;
+}
+
+.mycheckbox span {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  background: rgb(187, 186, 186);
+  cursor: pointer;
+  box-shadow: inset 0px 0px 2px rgb(15, 15, 15);
+
+  position: relative;
+}
+
+.mycheckbox span::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  transform: scale(0.85);
+  border-radius: 30px;
+  background: rgb(248, 22, 22);
+  transition: 0.5s;
+  box-shadow: inset 0px 0px 2px rgb(37, 37, 37);
+}
+
+.mycheckbox i {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  z-index: 1;
+  color: white;
+  transition: 0.5s;
+}
+
+.mycheckbox .on {
+  opacity: 0;
+  left: 7px;
+  top: 7px;
+}
+
+.mycheckbox .off {
+  left: 9px;
+  top: 7px;
+}
+
+.mycheckbox .off-bell {
+  left: 5px;
+}

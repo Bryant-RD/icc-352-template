@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Administrar Usuarios</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="navbar-brand">Home</a>
+            <ul class="navbar-links">
+              <li><a href="index.html" class="navbar-link">inicio</a></li>
+              <li><a href="usuarios.html" class="navbar-link">Administrar Usuarios</a></li>
+              <li><a href="#" class="navbar-link">Cerrar sesion</a></li>
+            </ul>
+            <div class="menu-icon">&#9776;</div>
+          </nav>
+    </header>
+    <div class="container">
+      <h1>Lista de Usuarios</h1>
+      <div class="table-1">
+        <table>
+          <tbody id="tableBody">
+            <tr>
+              <th>ID usuario</th>
+              <th>Username</th>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            </tr>
+            <tr>
+              <td data-th="ID usuario">1691605469655</td>
+              <td data-th="Username">1691605469655</td>
+              <td data-th="Nombre">Bryant</td>
+              <td data-th="Rol">ICC</td>
+              <td data-th="Acciones">
+                  <a href="#" id="editButton" class="actionButton">editar</a>
+                  <a href="#" id="deleteButton" class="actionButton">eliminar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="newUserButton">Agragar usuario</button>
+      </div>
+  </div>
+    <div id="pictureContainer" class="modal-overlay hidde">
+      <div class="modal-container">
+        <img id="imagen" src="" alt="Imagen">
+        <button id="closePicture" class="modal-close-btn">X</button>
+      </div>
+    </div>
+    <script src="./js/usuarios.js" type="module"></script>
+    <script src="./js/menu.js"></script>
+</body>
+</html>
