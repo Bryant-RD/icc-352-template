@@ -76,6 +76,77 @@ export const checkInternetConnection = () => {
     });
 }
 
-const getJWT = () => {
-  return localStorage.getItem("registros");
+export const registroLogin = (user) => {
+
+  const logins = JSON.parse(localStorage.getItem("registros")) || [];
+
+  localStorage.setItem("username", JSON.stringify(user));
+
+  let obj = {
+    id_registro: Date.now(),
+    username: user,
+    accion: "login",
+    feha: getTime()
+  }
+
+  logins.push(obj)
+  localStorage.setItem("sessions", JSON.stringify(logins));
+
+}
+
+export const registroLogout = () => {
+
+  const logins = JSON.parse(localStorage.getItem("sessions")) || [];
+  console.log(logins);
+
+  const user = localStorage.getItem("username");
+
+  
+
+  let obj = {
+    id_registro: Date.now(),
+    username: user.replace(/['"]+/g, ''),
+    accion: "logout",
+    feha: getTime()
+  }
+
+  logins.push(obj)
+  localStorage.setItem("sessions", JSON.stringify(logins));
+  deleteLocaleStorage("username")
+  
+  // window.location.href = "./login.html"
+
+
+}
+
+export const getSessions = () => {
+  return JSON.parse(localStorage.getItem("sessions")) || [];
+}
+
+export const getJWT = () => {
+  return localStorage.getItem("jwt");
+}
+
+export const deleteLocaleStorage = (item) => {
+  const keys = Object.keys(localStorage);
+
+  // Itera sobre las claves y elimina los registros deseados
+  keys.forEach(key => {
+    if (key.includes(item)) {
+      localStorage.removeItem(key);
+    }
+  });
+}
+
+export const getTime = () => {
+  const fechaActual = new Date();
+
+  // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+  const fechaISO = fechaActual.toISOString().split('T')[0];
+
+  // Obtener la hora actual en formato de 24 horas (hh:mm:ss)
+  const horaActual = fechaActual.toLocaleTimeString('en-US', { hour12: false });
+  const time = fechaISO + " " + horaActual;
+
+  return time;
 }

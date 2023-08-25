@@ -9,16 +9,15 @@
 </head>
 <body>
     <div class="container">
-        <form class="login-form" action="/login" method="post">
+        <form class="login-form">
             <h2>Iniciar Sesión</h2>
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
-            <label for="rememberMe">Recordar contraseña?</label>
-            <input type="checkbox" name="rememberMe" id="rememberMe" class="rememberMe">
-            <button type="submit">Ingresar</button> <p>No tienes cuenta? registrate <a class="button-regist" href="/newUser.html">Aqui</a></p>
+            <button id="sendData"s>Ingresar</button> <p>No tienes cuenta? registrate <a class="button-regist" href="/newUser.html">Aqui</a></p>
         </form>
     </div>
+    <script type="module" src="./js/login.js"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 const URL = "http://127.0.0.1:8080"
 
+import { getJWT, registroLogin, registroLogout, deleteLocaleStorage } from "./storageController.js";
+
 export const getUsers = async () => {
   try {
       const response = await fetch(`${URL}/users`);
@@ -97,7 +99,8 @@ try {
 export const login = (username, password) => {
 
   if (getJWT()) {
-      window.location.href = "home.html"
+      registroLogin(username);
+      window.location.href = "./index.html"
       return;
   }
 fetch(URL+"/login", {
@@ -109,8 +112,14 @@ fetch(URL+"/login", {
 })
     .then(async (response) => {
         if (response.ok) {
+          const data = await response.text();
 
-          return response.text();
+          if (data != "false") {
+              return data;
+          } else {
+              alert("El usuario o la contraseña son incorrectos");
+              window.location.href = "./login.html"
+          }
 
         } else {
             throw new Error("Inicio de sesión fallido");
@@ -118,13 +127,19 @@ fetch(URL+"/login", {
     })
     .then((jwt) => {
 
-      console.log(jwt);
-      localStorage.setItem('jwt', jwt);
-      window.location.href = "home.html"
+
+      if (jwt != "false" && jwt != undefined) {
+          localStorage.setItem('jwt', jwt);
+          registroLogin(username);
+          console.log(jwt);
+          // window.location.href = "./index.html"
+      }
 
     })
     .catch((error) => {
         console.error(error);
+        alert("Error de conexion y no hay sesion vigente")
+        window.location.href = "./login.html"
         // Mostrar un mensaje de error al usuario
     });
 }
@@ -133,8 +148,10 @@ fetch(URL+"/login", {
 export const LogOut = async () => {
 
   if (getJWT()) {
-      deleteJWT();
-      window.location.href = "index.html"
+      deleteLocaleStorage("jwt")
+      // window.location.href = "index.html"
+      registroLogout()
+      return;
   }
  
   fetch(URL+'/logout', {
@@ -147,9 +164,8 @@ export const LogOut = async () => {
       if (response.ok) {
         // Cierre de sesión exitoso, redirigir a la página de inicio de sesión
 
-        deleteJWT();
-
-        window.location.href = '/index.html';
+        registroLogout();
+        window.location.href = '/login.html';
       } else {
         // Ocurrió un error al cerrar sesión
         console.log('Error al cerrar sesión');
