@@ -1,4 +1,4 @@
-import { getUsers } from "./api/user.controller.js";
+import { deleteUserById, getUsers } from "./api/user.controller.js";
 
 const newUserButton = document.getElementById("newUserButton");
 const tableBody = document.getElementById("tableBody");
@@ -31,7 +31,7 @@ const printUsuarios = async () => {
                     break;
 
                 case "deleteButton":
-                    eliminarRegistro(item.id_user)
+                    deleteUserById(item.id_user)
                     break;
                                     
                 default:

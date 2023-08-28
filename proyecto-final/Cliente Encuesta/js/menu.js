@@ -7,7 +7,7 @@ const logoutBtn = document.getElementById("logout");
 
 
 if (!getJWT()) {
-  window.location.href = "/index.html"
+  window.location.href = "./index.html"
 }
 
 //Abre menu en telefono

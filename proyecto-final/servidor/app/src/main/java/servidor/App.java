@@ -34,6 +34,12 @@ public class App {
         app.routes(() -> {
             RutaEncuesta.configure(app);
             RutaUsuario.configure(app);
+
+            app.before("/", ctx -> {
+                ctx.redirect("./index.html");
+            });
+
+
         });
 
     }

@@ -33,7 +33,7 @@ const printRegistros = () => {
             console.log();
             switch (select) {
                 case "editButton":
-                    window.location.href = `/index.html?id=${item.id_encuesta}`;
+                    window.location.href = `./index.html?id=${item.id_encuesta}`;
                     break;
 
                 case "deleteButton":

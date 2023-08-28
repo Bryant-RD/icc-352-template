@@ -39,10 +39,6 @@ registrar.addEventListener("click", async (e) => {
 
     if (id != null) {
 
-
-        console.log(formulario);
-        console.log("hola");
-
         obj = {
             id_user: id,
             userName: username.value,
@@ -50,7 +46,6 @@ registrar.addEventListener("click", async (e) => {
             password: pass1.value,
             rol: document.getElementById("rol").value
         }
-
 
         userAction = await updateUserById(id, obj);
     }else {
@@ -73,8 +68,7 @@ registrar.addEventListener("click", async (e) => {
         pass2.value = "";
         userAction = await createUser(obj)
 
-       
-    //    window.location.href = "/login.html"
+       window.location.href = "/index.html"
     }
 })
 

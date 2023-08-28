@@ -84,6 +84,7 @@ try {
 
   if (response.ok) {
       alert("Articulo editado correctamente.");
+      window.location.href = "./index.html"
   } else {
       console.log("HTTP request unsuccessful");
   }
@@ -113,6 +114,7 @@ fetch("/login", {
     .then(async (response) => {
         if (response.ok) {
           const data = await response.text();
+          window.location.href = "./index.html"
 
           if (data != "false") {
               return data;
@@ -149,7 +151,7 @@ export const LogOut = async () => {
 
   if (getJWT()) {
       deleteLocaleStorage("jwt")
-      // window.location.href = "index.html"
+      window.location.href = "./index.html"
       registroLogout()
       return;
   }
@@ -165,7 +167,7 @@ export const LogOut = async () => {
         // Cierre de sesión exitoso, redirigir a la página de inicio de sesión
 
         registroLogout();
-        window.location.href = '/login.html';
+        window.location.href = './login.html';
       } else {
         // Ocurrió un error al cerrar sesión
         console.log('Error al cerrar sesión');

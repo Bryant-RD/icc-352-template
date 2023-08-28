@@ -45,7 +45,7 @@ export const login = (username, password) => {
 
     if (getJWT()) {
         registroLogin(username);
-        window.location.href = "home.html"
+        window.location.href = "./home.html"
         return;
     }
   fetch(IP+"/login", {
@@ -63,7 +63,7 @@ export const login = (username, password) => {
                 return data;
             } else {
                 alert("El usuario o la contraseña son incorrectos");
-                window.location.href = "index.html"
+                window.location.href = "./index.html"
             }
 
           } else {
@@ -77,14 +77,14 @@ export const login = (username, password) => {
             localStorage.setItem('jwt', jwt);
             registroLogin(username);
             console.log(jwt);
-            window.location.href = "home.html"
+            window.location.href = "./home.html"
         }
 
       })
       .catch((error) => {
           console.error(error);
           alert("Error de conexion y no hay sesion vigente")
-          window.location.href = "index.html"
+          window.location.href = "./index.html"
           // Mostrar un mensaje de error al usuario
       });
 }
@@ -94,7 +94,7 @@ export const LogOut = async () => {
 
     if (getJWT()) {
         deleteLocaleStorage("jwt")
-        window.location.href = "index.html"
+        window.location.href = "./index.html"
         registroLogout()
         return;
     }
@@ -111,7 +111,7 @@ export const LogOut = async () => {
 
           deleteLocaleStorage();
           registroLogout();
-          window.location.href = '/index.html';
+          window.location.href = './index.html';
         } else {
           // Ocurrió un error al cerrar sesión
           console.log('Error al cerrar sesión');
