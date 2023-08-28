@@ -38,6 +38,8 @@ export const sincronizarRegistros = async (registros) => {
     }
 }
 
+
+
 // Función para iniciar sesión
 export const login = (username, password) => {
 
@@ -92,7 +94,7 @@ export const LogOut = async () => {
 
     if (getJWT()) {
         deleteLocaleStorage("jwt")
-        // window.location.href = "index.html"
+        window.location.href = "index.html"
         registroLogout()
         return;
     }

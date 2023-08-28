@@ -11,8 +11,6 @@ export const obtenerRegistros = async () => {
     } else {
       let registrosLocal = JSON.parse(localStorage.getItem("registros")) || [];
       let allRegistros = registrosLocal.concat(registrosNube);
-      // console.log(allRegistros);
-      // localStorage.setItem("registros", JSON.stringify(allRegistros))
       return allRegistros;
     }
 

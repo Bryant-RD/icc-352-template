@@ -73,7 +73,7 @@ uploadButton.addEventListener("click", e => {
     if (checkInternetConnection) {
       console.log("TENGO");
       const registros = obtenerRegistros()
-      worker.postMessage(registros)
+      worker.postMessage({tipo: "registro", datos: registros})
       worker.addEventListener("message", (event) => {
         console.log(event.data);
         if (event.data.status == "success") {

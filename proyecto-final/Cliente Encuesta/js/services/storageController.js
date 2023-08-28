@@ -51,7 +51,7 @@ export const registroLogin = (user) => {
     id_registro: Date.now(),
     username: user,
     accion: "login",
-    feha: getTime()
+    fecha: getTime()
   }
 
   logins.push(obj)
@@ -71,7 +71,7 @@ export const registroLogout = () => {
     id_registro: Date.now(),
     username: user,
     accion: "logout",
-    feha: getTime()
+    fecha: getTime()
   }
 
   logins.push(obj)

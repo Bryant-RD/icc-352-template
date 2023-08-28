@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package formulariorn;
+
+message Coordenadas {
+  string latitud = 1;
+  string longitud = 2;
+}
+
+
+message Formulario {
+  string id_encuesta = 1;
+  string id_encuestador = 2;
+  string nombre = 3;
+  string sector = 4;
+  string nivel = 5;
+  Coordenadas coordenadas = 6;
+  string foto = 7;
+}
+
+message CrearFormularioRequest {
+  Formulario formulario = 1;
+}
+
+message CrearFormularioResponse {
+ Formulario formulario = 1;
+}
+
+
+message ListarFormulariosRequest{
+  string usernameAgente = 1;
+}
+
+message ListarFormulariosResponse{
+  repeated Formulario formularios = 1;
+}
+
+
+
+
+service ServicioCreacion{
+  rpc CrearFormulario(CrearFormularioRequest) returns (CrearFormularioResponse) {}
+}
+
+service ServicioListado{
+  rpc ListarFormularios(ListarFormulariosRequest) returns (ListarFormulariosResponse) {}
+}

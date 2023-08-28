@@ -4,6 +4,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.InsertOneResult;
 
+import servidor.entidades.Registro;
 import servidor.entidades.Usuario;
 
 import org.bson.Document;
@@ -145,6 +146,24 @@ public class UsuarioService {
         System.out.println("Insertar: "+insertOneResult.getInsertedId()+", Acknowledged:"+insertOneResult.wasAcknowledged());
 
         return usuario;
+    }
+
+        public Registro crearRegistro(@NotNull Registro registro){
+            System.out.println("\n\n" + registro.getUsername() + "\n\n" );
+        //
+        Document document = new Document("id_registro", registro.getId_registro())
+            .append("username", registro.getUsername())
+            .append("accion", registro.getAccion())
+            .append("fecha", registro.getFecha());
+
+        //
+        MongoCollection<Document> registros = mongoDbConexion.getBaseDatos().getCollection("logs");
+        //
+        InsertOneResult insertOneResult = registros.insertOne(document);
+        //
+        System.out.println("Insertar: "+insertOneResult.getInsertedId()+", Acknowledged:"+insertOneResult.wasAcknowledged());
+
+        return registro;
     }
 
     public Usuario actualizarUsuario(@NotNull Usuario usuario){

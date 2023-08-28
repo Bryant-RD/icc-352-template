@@ -1,4 +1,5 @@
-import { actualizarRegistro, crearRegistro, obtenerRegistro } from "./services/storageController.js";
+import { checkInternetConnection } from "./services/api.js";
+import { actualizarRegistro, crearRegistro, getSessions, obtenerRegistro } from "./services/storageController.js";
 
 // Selectores para camara
 const webcamElement = document.getElementById('webcam');
@@ -26,6 +27,23 @@ const nivel = document.getElementById("nivel")
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
+
+
+if (checkInternetConnection) {
+
+  const logs = getSessions();
+
+  worker.postMessage({tipo: "login", datos: logs})
+  worker.addEventListener("uploadSessions", (event) => {
+    console.log(event.data);
+    if (event.data.status == "success") {
+
+      deleteLocaleStorage("sessions")
+
+    }
+    alert(event.data.message);
+  })
+}
 
 
 //Obtiene coordenadas

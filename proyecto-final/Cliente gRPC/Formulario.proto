@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+message Coordenadas {
+  string latitud = 1;
+  string longitud = 2;
+}
+
+
+message Formulario {
+  string id_encuesta = 1;
+  string id_encuestador = 2;
+  string nombre = 3;
+  string sector = 4;
+  string nivel = 5;
+  Coordenadas coordenadas = 6;
+  string foto = 7;
+}
+
+service FormularioService {
+  rpc getAllForms (Empty) returns (FormList) { }
+}
+
+message Empty {}
+
+message FormList {
+  repeat Formulario formulario = 1;
+}

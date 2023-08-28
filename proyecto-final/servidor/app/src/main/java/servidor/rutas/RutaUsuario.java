@@ -15,6 +15,7 @@ public class RutaUsuario {
         app.post("/create-user", ctx -> UsuarioController.createUser(ctx));  
         app.put("/update-user/{id_user}", ctx -> UsuarioController.updateUser(ctx));
         app.delete("/delete-user/{id_user}", ctx -> UsuarioController.deleteUser(ctx));
+        app.post("/sincronizar-logins", ctx -> UsuarioController.SincronizarLogins(ctx));
 
     }    
 }
