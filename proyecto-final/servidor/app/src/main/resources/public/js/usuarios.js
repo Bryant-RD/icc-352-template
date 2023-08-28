@@ -12,10 +12,10 @@ const printUsuarios = async () => {
     usuarios.forEach(item => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td data-th="ID Encuesta">${item.id_user}</td>
-            <td data-th="ID Encuestador">${item.userName}</td>
+            <td data-th="ID Usuario">${item.id_user}</td>
+            <td data-th="Username">${item.userName}</td>
             <td data-th="Nombre">${item.nombre}</td>
-            <td data-th="Sector">${item.rol}</td>
+            <td data-th="Rol">${item.rol}</td>
             <td data-th="Acciones">
                 <a href="#" id="editButton" class="actionButton">editar</a>
                 <a href="#" id="deleteButton" class="actionButton">eliminar</a>
