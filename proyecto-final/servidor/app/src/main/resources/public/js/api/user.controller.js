@@ -4,7 +4,7 @@ import { getJWT, registroLogin, registroLogout, deleteLocaleStorage } from "./st
 
 export const getUsers = async () => {
   try {
-      const response = await fetch(`${URL}/users`);
+      const response = await fetch(`/users`);
       const data = await response.json();
       return data;
   } catch (error) {
@@ -15,7 +15,7 @@ export const getUsers = async () => {
 
 export const getUserById = async (id) => {
 try {
-  const response = await fetch(`${URL}/user/${id}`)
+  const response = await fetch(`/user/${id}`)
   const data = await response.json();
   return data
 
@@ -27,7 +27,7 @@ try {
 export const createUser = async (user) => {
 
 try {
-    const response = await fetch(`${URL}/create-user`, {
+    const response = await fetch(`/create-user`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
@@ -51,7 +51,7 @@ try {
 
 export const deleteUserById = async (id) => {
   try {
-    const response = await fetch(`${URL}/delete-user/${id}`, {
+    const response = await fetch(`/delete-user/${id}`, {
         method: "DELETE",
         headers: {
             'Content-type': 'application/json'
@@ -74,7 +74,7 @@ export const deleteUserById = async (id) => {
 
 export const updateUserById = async (id, obj) => {
 try {
-  const response = await fetch(`${URL}/update-user/${id}`, {
+  const response = await fetch(`/update-user/${id}`, {
       method: "PUT",
       headers: {
           'Content-type': 'application/json'
@@ -103,7 +103,7 @@ export const login = (username, password) => {
       window.location.href = "./index.html"
       return;
   }
-fetch(URL+"/login", {
+fetch("/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -154,7 +154,7 @@ export const LogOut = async () => {
       return;
   }
  
-  fetch(URL+'/logout', {
+  fetch('/logout', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
