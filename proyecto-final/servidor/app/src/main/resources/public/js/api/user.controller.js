@@ -1,4 +1,4 @@
-const URL = "http://127.0.0.1:8080"
+const URL = "https://app.brtecnology.me:8080"
 
 import { getJWT, registroLogin, registroLogout, deleteLocaleStorage } from "./storageController.js";
 

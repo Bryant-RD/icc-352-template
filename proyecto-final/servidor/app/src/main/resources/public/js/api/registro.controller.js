@@ -1,4 +1,4 @@
-export const URL = "http://localhost:8080"
+export const URL = "https://app.brtecnology.me:8080"
 
 export const getRegistros = async () => {
     try {
