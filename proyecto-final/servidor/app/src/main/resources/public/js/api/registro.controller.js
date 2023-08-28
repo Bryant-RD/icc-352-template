@@ -2,7 +2,7 @@ export const URL = "https://app.brtecnology.me:8080"
 
 export const getRegistros = async () => {
     try {
-        const response = await fetch(`${URL}/registros`);
+        const response = await fetch(`/registros`);
         const data = await response.json();
         console.log(data);
         return data;
@@ -15,7 +15,7 @@ export const getRegistros = async () => {
 export const getRegistrobyId = async ( id ) => {
     console.log("la buena " + id);
     try {
-        const response = await fetch(`${URL}/registro/${id}`);
+        const response = await fetch(`/registro/${id}`);
         const data = await response.json();
         return data;
     } catch (e) {
@@ -27,7 +27,7 @@ export const getRegistrobyId = async ( id ) => {
 
 export const createRegistro = async (registro) => {
     try {
-        const response = await fetch(`${URL}/create-registro`, {
+        const response = await fetch(`/create-registro`, {
             method: "POST",
             body: JSON.stringify(registro),
             headers: {
@@ -50,7 +50,7 @@ export const createRegistro = async (registro) => {
 
 export const deleteRegistroById = async (id) => {
     try {
-        const response = await fetch(`${URL}/delete-registro/${id}`, {
+        const response = await fetch(`/delete-registro/${id}`, {
             method: "DELETE",
             headers: {
                 'Content-type': 'application/json'
@@ -72,7 +72,7 @@ export const deleteRegistroById = async (id) => {
 
 export const updateRegistroById = async (id, obj) => {
     try {
-        const response = await fetch(`${URL}/update-registro/${id}`, {
+        const response = await fetch(`/update-registro/${id}`, {
             method: "PUT",
             headers: {
                 'Content-type': 'application/json'
